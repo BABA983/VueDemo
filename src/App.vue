@@ -1,6 +1,6 @@
 <template>
   <div class="todo-container">
-    <div  class="todo-wrap">
+    <div class="todo-wrap">
       <TodoHeader :addTodo="addTodo"></TodoHeader>
       <TodoList :todos="todos" :deleteTodo="deleteTodo"></TodoList>
       <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos"
@@ -13,25 +13,32 @@
   import TodoHeader from './components/TodoHeader.vue'
   import TodoList from './components/TodoList.vue'
   import TodoFooter from './components/TodoFooter.vue'
-    export default {
-    data () {
+
+  export default {
+    data() {
       return {
-        todos: [
-          {title:'eat breakfast',complete:false},
-          {title:'study',complete:false},
-          {title:'entertainment',complete:false}
-        ]
+        //从localStorage读取todos
+        todos: JSON.parse(window.localStorage.getItem('todos_key') || '[]')    //k-v
+      }
+    },
+    watch: { //监视
+      todos: {
+        deep: true, //深度
+        handler: function (value) {
+          //将todos最新的值保存到localStorage
+          window.localStorage.setItem('todos_key', JSON.stringify(value))
+        }
       }
     },
     methods: {
-      addTodo (todo) {
+      addTodo(todo) {
         this.todos.unshift(todo)
       },
-      deleteTodo (index) {
+      deleteTodo(index) {
         this.todos.splice(index, 1)
       },
       //删除所有选中
-      deleteCompleteTodos () {
+      deleteCompleteTodos() {
         /**
          * var sum = (num1, num2) => num1 + num2;
          *
@@ -42,16 +49,16 @@
         this.todos = this.todos.filter(todo => !todo.complete)
       },
       //全选或全不选
-      selectAllTodos (check) {
+      selectAllTodos(check) {
         this.todos.forEach(todo => todo.complete = check)
       }
     },
-      components: {
-        TodoHeader,
-        TodoList,
-        TodoFooter
-      }
+    components: {
+      TodoHeader,
+      TodoList,
+      TodoFooter
     }
+  }
 </script>
 
 <style>
@@ -68,7 +75,7 @@
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
-    box-shadow: inset 0 1px 0 rgba(225, 225, 225, 0.2), 0 1px 2px rgba(0, 0, 0,0.15);
+    box-shadow: inset 0 1px 0 rgba(225, 225, 225, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
   }
 
@@ -87,11 +94,11 @@
     outline: none;
   }
 
-
   .todo-container {
     width: 600px;
     margin: 0 auto;
   }
+
   .todo-container .todo-wrap {
     padding: 10px;
     border: 1px solid #ddd;
