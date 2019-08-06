@@ -13,9 +13,7 @@
         }
       },
       props: {
-        addTodo: {
-          type: Function
-        }
+
       },
       methods: {
         addItem () {
@@ -31,7 +29,9 @@
             complete: false
           }
           //3、添加到todos
-          this.addTodo(todo)
+          //this.addTodo(todo)
+          //触发自定义事件：addTodo
+          this.$emit('addTodo', this.todo)
           //4、清除输入框内容
           this.title=''
         }
