@@ -2,9 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <!--<link rel="stylesheet" href="./static/css/bootstrap.css">-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximun-scale=1,minimun-scale=1,user-scaleable=no">
+    <link rel="stylesheet" href="./static/css/bootstrap.css">
     <title>vue_demo</title>
+    <script type='application/javascript' src='/path/to/fastclick.js'>
+      if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body);
+        }, false);
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>
