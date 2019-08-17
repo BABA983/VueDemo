@@ -26,7 +26,7 @@
     },
     mounted () { //执行异步代码
       //给<ToDoHeader/>绑定addTodo事件监听
-//      this.$on('addTodo', this.addTodo) //这样写是给App组件绑定监听
+//      this.$on('addTodo', this.addTodo) //这样写是给App组件绑定监听 不对
       this.$refs.header.$on('addTodo', this.addTodo) //绑定ref为header的组件
 
 
