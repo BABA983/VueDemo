@@ -29,8 +29,13 @@
 //      this.$on('addTodo', this.addTodo) //这样写是给App组件绑定监听 不对
       this.$refs.header.$on('addTodo', this.addTodo) //绑定ref为header的组件
 
+      /*PubSub.subscribe('deleteTodo', function(msg, data){
+        this.deleteTodo(data) //this不对
+      })*/
 
-
+      PubSub.subscribe('deleteTodo', (msg, data) => {
+        this.deleteTodo(data)
+      })
     },
     watch: { //监视
       todos: {
