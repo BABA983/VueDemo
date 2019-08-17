@@ -45,6 +45,7 @@
           const {todo} = this
           if(window.confirm('确认删除${todo.title}吗')){
             this.deleteTodo(index)
+            //PubSub.publish('deleteTodo', index)
           }
         }
       }
